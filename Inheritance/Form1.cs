@@ -1,13 +1,27 @@
+using System.Windows.Forms;
+
 namespace Inheritance
 {
     public partial class Form1 : Form
     {
+
         List<CosmicObject> objectsList = new List<CosmicObject>();
+        ImageList imageList;
         public Form1()
         {
             InitializeComponent();
 
             ShowInfo();
+
+            // Создаем ImageList и добавляем изображения
+            this.imageList = new ImageList();
+
+            // Присваиваем изображения в ListView
+            listView1.LargeImageList = imageList;
+
+            imageList.Images.Add("meteor", Properties.Resources.meteor);
+            imageList.Images.Add("star", Properties.Resources.star);
+            imageList.Images.Add("planet", Properties.Resources.planet);
         }
 
         private void btnRefill_Click(object sender, EventArgs e)
@@ -40,27 +54,36 @@ namespace Inheritance
             int starsCount = 0;
             int cometsCount = 0;
 
+
+            listView1.Items.Clear();
+
+
             // пройдемся по всему списку
             foreach (var myObject in this.objectsList)
             {
+
+
                 if (myObject is Planet)
                 {
+                    listView1.Items.Add(new ListViewItem("Планета", "planet"));
+
                     planetsCount += 1;
                 }
                 else if (myObject is Star)
                 {
+                    listView1.Items.Add(new ListViewItem("Звезда", "star"));
                     starsCount += 1;
                 }
                 else if (myObject is Comet)
                 {
+                    listView1.Items.Add(new ListViewItem("Комета", "meteor"));
+
                     cometsCount += 1;
                 }
             }
 
             // а ну и вывести все это надо на форму
-            txtInfo.Text = "Плнт\tЗвзд\tКомт"; // буквы экнмлю, чтобы влезло на форму
-            txtInfo.Text += "\n";
-            txtInfo.Text += String.Format("{0}\t{1}\t{2}", planetsCount, starsCount, cometsCount);
+            txtInfo.Text = String.Format("Планеты: {0}.\tЗвезды: {1}.\tКометы: {2}", planetsCount, starsCount, cometsCount);
         }
 
         private void btnGet_Click(object sender, EventArgs e)
@@ -96,6 +119,11 @@ namespace Inheritance
             txtOut.Text = myObject.GetInfo();
             // обновим информацию о количестве товара на форме
             ShowInfo();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

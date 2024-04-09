@@ -16,6 +16,11 @@ namespace Inheritance
             var str = String.Format("\nМасса: {0}", this.mas);
             return str;
         }
+        public virtual String getType()
+        {
+            return "Я космический объект";
+        }
+
     }
 
 
@@ -46,6 +51,10 @@ namespace Inheritance
                 gravitationalForce = rnd.Next() % 100 // гравитация от 0 до 100
             };
         }
+        public override String getType()
+        {
+            return "planet";
+        }
     }
     public enum StarColor { blue, white, yellow, orange, red };
     public class Star : CosmicObject
@@ -73,6 +82,10 @@ namespace Inheritance
                 temp = -1000 + rnd.Next() % 10000 // температура от -1000 до 9000
             };
         }
+        public override String getType()
+        {
+            return "star";
+        }
     }
     public enum CometName { B999C, GH56, YO817, TL62, NE555 };
     public class Comet : CosmicObject
@@ -96,6 +109,10 @@ namespace Inheritance
                 period = 1 + rnd.Next() % 10000, // Период от 1 до 10001
                 name = (CometName)rnd.Next(5), // имя
             };
+        }
+        public override String getType()
+        {
+            return "comet";
         }
     }
 }
