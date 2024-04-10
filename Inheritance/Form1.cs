@@ -5,23 +5,29 @@ namespace Inheritance
     public partial class Form1 : Form
     {
 
-        List<CosmicObject> objectsList = new List<CosmicObject>();
-        ImageList imageList;
+        private List<CosmicObject> objectsList = new List<CosmicObject>();
+        private ImageList imageList;
         public Form1()
         {
             InitializeComponent();
 
+            //Ставим окно на центр экрана
+            this.StartPosition = FormStartPosition.CenterScreen;
+
+            // Выведем строчку с количеством объектов
             ShowInfo();
 
-            // Создаем ImageList и добавляем изображения
+            // Создаем ImageList
             this.imageList = new ImageList();
+
+            //Добавляем в список изображения
+            imageList.Images.Add("meteor", Properties.Resources.meteor);
+            imageList.Images.Add("star", Properties.Resources.star);
+            imageList.Images.Add("planet", Properties.Resources.planet);
 
             // Присваиваем изображения в ListView
             listView1.LargeImageList = imageList;
 
-            imageList.Images.Add("meteor", Properties.Resources.meteor);
-            imageList.Images.Add("star", Properties.Resources.star);
-            imageList.Images.Add("planet", Properties.Resources.planet);
         }
 
         private void btnRefill_Click(object sender, EventArgs e)
@@ -95,35 +101,16 @@ namespace Inheritance
                 return;
             }
 
-            // взяли первый объект
+            // взяли первый объект, создали указатель на этот объект
             var myObject = this.objectsList[0];
-            // тут вам не реальность, взятие это на самом деле создание указателя на область в памяти
-            // где хранится экземпляр класса, так что если хочешь удалить, делай это сам
+            // удаляем объект из списка
             this.objectsList.RemoveAt(0);
 
-            // ну а теперь предложим покупателю его объект
-
-            /*
-            if (myObject is Planet)
-            {
-                txtOut.Text = "Планета";
-            }
-            else if (myObject is Star)
-            {
-                txtOut.Text = "Звезда";
-            }
-            else if (myObject is Comet)
-            {
-                txtOut.Text = "Комета";
-            }*/
+            // выведем информацию об объекте
             txtOut.Text = myObject.GetInfo();
             // обновим информацию о количестве товара на форме
             ShowInfo();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

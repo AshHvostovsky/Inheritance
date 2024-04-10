@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 
 namespace Inheritance
 {
+    public enum StarColor { blue, white, yellow, orange, red };
+    public enum CometName { B999C, GH56, YO817, TL62, NE555 };
     public class CosmicObject 
     {
-        public int mas = 0; // масса
-        public static Random rnd = new Random();
+        protected int mas = 0; // масса
+        protected static Random rnd = new Random();
         public virtual String GetInfo()
         {
             var str = String.Format("\nМасса: {0}", this.mas);
@@ -26,9 +28,9 @@ namespace Inheritance
 
     public class Planet : CosmicObject
     {
-        public int radius = 0; // радиус
-        public bool withAtmosphere = false; // наличие атмосферы
-        public int gravitationalForce = 0; // сила притяжения
+        private int radius = 0; // радиус
+        private bool withAtmosphere = false; // наличие атмосферы
+        private int gravitationalForce = 0; // сила притяжения
 
         public override String GetInfo()
         {
@@ -51,17 +53,13 @@ namespace Inheritance
                 gravitationalForce = rnd.Next() % 100 // гравитация от 0 до 100
             };
         }
-        public override String getType()
-        {
-            return "planet";
-        }
     }
-    public enum StarColor { blue, white, yellow, orange, red };
+    
     public class Star : CosmicObject
     {
-        public int density = 0; // плотность
-        public StarColor color = StarColor.red; // цвет
-        public int temp = 0; // температура
+        private int density = 0; // плотность
+        private StarColor color = StarColor.red; // цвет
+        private int temp = 0; // температура
         public override String GetInfo()
         {
             var str = "Я звезда";
@@ -82,16 +80,12 @@ namespace Inheritance
                 temp = -1000 + rnd.Next() % 10000 // температура от -1000 до 9000
             };
         }
-        public override String getType()
-        {
-            return "star";
-        }
     }
-    public enum CometName { B999C, GH56, YO817, TL62, NE555 };
+   
     public class Comet : CosmicObject
     {
-        public int period = 0; // период
-        public CometName name = CometName.GH56; // название
+        private int period = 0; // период
+        private CometName name = CometName.GH56; // название
         public override String GetInfo()
         {
             var str = "Я комета";
@@ -109,10 +103,6 @@ namespace Inheritance
                 period = 1 + rnd.Next() % 10000, // Период от 1 до 10001
                 name = (CometName)rnd.Next(5), // имя
             };
-        }
-        public override String getType()
-        {
-            return "comet";
         }
     }
 }

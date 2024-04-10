@@ -116,8 +116,7 @@
             Controls.Add(btnGet);
             Controls.Add(btnRefill);
             Name = "Form1";
-            Text = "Form1";
-            Load += Form1_Load;
+            Text = "Торговый автомат по продаже космическими объектами";
             ResumeLayout(false);
             PerformLayout();
         }
